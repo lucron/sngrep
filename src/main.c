@@ -117,6 +117,9 @@ version()
 #ifdef USE_EEP
             " * Compiled with EEP/HEP support.\n"
 #endif
+#ifdef WITH_ZLIB
+            " * Compiled with zlib support.\n"
+#endif
            "\nWritten by Ivan Alonso [aka Kaian]\n",
            PACKAGE, VERSION);
 }
