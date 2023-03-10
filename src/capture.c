@@ -265,7 +265,7 @@ capture_offline(const char *infile)
 
     // Open PCAP file
     if ((capinfo->handle = pcap_open_offline(infile, errbuf)) == NULL) {
-#if defined(WITH_ZLIB)
+#if defined(WITH_ZLIB) && (defined(HAVE_FOPENCOOKIE) || defined(HAVE_FUNOPEN))
         // we can't directly parse the file as pcap - could it be gzip compressed?
         gzFile zf = gzopen(infile, "rb");
         if (!zf)
@@ -1422,7 +1422,7 @@ dump_open(const char *dumpfile, ino_t* dump_inode)
 
         if (is_gz_filename(dumpfile))
         {
-#if defined(WITH_ZLIB)
+#if defined(WITH_ZLIB) && (defined(HAVE_FOPENCOOKIE) || defined(HAVE_FUNOPEN))
             // create a gzip file stream out of the already opened file
             gzFile zf = gzdopen(fileno(fp), "w");
             if (!zf)
